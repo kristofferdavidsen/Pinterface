@@ -7,10 +7,18 @@
     "start": "next start"
   },
   "dependencies": {
-    "mongodb": "^3.5.9",
+    "autoprefixer": "^10.2.5",
+    "mongodb": "^3.6.6",
     "next": "latest",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "postcss": "^8.2.14",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tailwindcss": "^2.1.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^15.0.2",
+    "@types/react": "^17.0.5",
+    "typescript": "^4.2.4"
+  }
 }

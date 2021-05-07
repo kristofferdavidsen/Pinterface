@@ -1,0 +1,31 @@
+import { AppProps } from "next/app"
+import { createContext, useState } from "react"
+import "tailwindcss/tailwind.css"
+import "../styles/globals.css"
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
+	const LoginContext = createContext({
+		username: null,
+		loggedIn: false,
+		setLoggedIn: () => {},
+		setLoggedOut: () => {},
+	})
+	const [loggedIn, setLoggedIn] = useState(false)
+
+	const login = () => setLoggedIn(true)
+	const logout = () => setLoggedIn(false)
+
+	return (
+		<LoginContext.Provider
+			value={{
+				username: "",
+				loggedIn: loggedIn,
+				setLoggedIn: login,
+				setLoggedOut: logout,
+			}}
+		>
+			<Component {...pageProps} loginContext={LoginContext} />
+		</LoginContext.Provider>
+	)
+}
+export default MyApp
