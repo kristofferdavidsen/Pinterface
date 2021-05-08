@@ -6,15 +6,7 @@ import { TempList } from "../components/TempList"
 import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"
 
-type DashboardProps = {
-	temperatures: Array<Temperature>
-	loginContext
-}
-
-const Dashboard: React.FC<DashboardProps> = ({
-	temperatures,
-	loginContext,
-}) => {
+const Dashboard = ({ temperatures, loginContext }) => {
 	const router = useRouter()
 	const { loggedIn } = useContext(loginContext)
 
@@ -41,7 +33,7 @@ const Dashboard: React.FC<DashboardProps> = ({
 }
 export default Dashboard
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context: any) => {
 	const { db } = await connectToDatabase()
 	const temps = await db.collection("temperatur").find({}).toArray()
 
