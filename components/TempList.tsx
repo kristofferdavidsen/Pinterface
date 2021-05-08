@@ -1,7 +1,9 @@
 import { useState } from "react"
 import { Temperature } from "../interfaces/Temperature"
 
-export const TempList = ({ temperatures }) => {
+export const TempList: React.FC<{ temperatures: Array<Temperature> }> = ({
+	temperatures,
+}) => {
 	const [active, setActive] = useState(true)
 	const updateButton1 = () => setActive(true)
 	const updateButton2 = () => setActive(false)

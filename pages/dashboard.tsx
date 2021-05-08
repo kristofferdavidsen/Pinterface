@@ -3,9 +3,18 @@ import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import { TempList } from "../components/TempList"
+import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"
 
-const Dashboard = ({ temperatures, loginContext }) => {
+type DashboardProps = {
+	temperatures: Array<Temperature>
+	loginContext
+}
+
+const Dashboard: React.FC<DashboardProps> = ({
+	temperatures,
+	loginContext,
+}) => {
 	const router = useRouter()
 	const { loggedIn } = useContext(loginContext)
 

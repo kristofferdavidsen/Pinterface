@@ -1,11 +1,11 @@
 import Head from "next/head"
 import { connectToDatabase } from "../util/mongodb"
-import Link from "next/link"
 import { useContext } from "react"
 import Navbar from "../components/Navbar"
 import Login from "../components/Login"
+import { NextPageContext } from "next"
 
-export default function Home({ isConnected, loginContext }) {
+const Home = ({ isConnected, loginContext }) => {
 	const value = useContext(loginContext)
 
 	return (
@@ -22,8 +22,9 @@ export default function Home({ isConnected, loginContext }) {
 		</>
 	)
 }
+export default Home
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps() {
 	const { client } = await connectToDatabase()
 
 	const isConnected = await client.isConnected()

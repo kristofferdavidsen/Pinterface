@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
 	return (
 		<div className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-dark-blue text-off-white mb-3">
 			<div className="container px-4 mx-auto flex flex-wrap items-center justify-between">

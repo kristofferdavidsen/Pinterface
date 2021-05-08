@@ -3,7 +3,7 @@ import { createContext, useState } from "react"
 import "tailwindcss/tailwind.css"
 import "../styles/globals.css"
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	const LoginContext = createContext({
 		username: null,
 		loggedIn: false,
