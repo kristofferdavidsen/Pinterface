@@ -1,14 +1,13 @@
-import { GetStaticProps } from "next"
+import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import { TempList } from "../components/TempList"
-import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"
 
 const Dashboard = ({ temperatures, loginContext }) => {
 	const router = useRouter()
-	const { loggedIn } = useContext(loginContext)
+	const { loggedIn, setLoggedOut } = useContext(loginContext)
 
 	const validateLogin = () => {
 		if (!loggedIn) {
@@ -18,11 +17,11 @@ const Dashboard = ({ temperatures, loginContext }) => {
 
 	useEffect(() => {
 		validateLogin()
-	})
+	}, [])
 
 	return (
 		<>
-			<Navbar />
+			<Navbar setLoggedOut={setLoggedOut} />
 			{loggedIn && (
 				<div className="container grid grid-cols-1 m-auto">
 					<TempList temperatures={temperatures} />
