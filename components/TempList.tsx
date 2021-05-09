@@ -21,13 +21,13 @@ export const TempList: React.FC<{ temperatures: Array<Temperature> }> = ({
 				<button
 					onClick={updateButton2}
 					className={`${
-						active === 2 ? "bg-blue-300" : "bg-dark-blue text-off-white"
+						active === 1 ? "bg-blue-300" : "bg-dark-blue text-off-white"
 					} p-4 border-b-2 border-black`}
 				>
 					Statistikk
 				</button>
 			</div>
-			{active ? (
+			{active === 1 ? (
 				<div className="text-center">
 					<ul>
 						{temperatures.map((temp: Temperature, index: number) => (

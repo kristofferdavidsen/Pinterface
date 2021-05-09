@@ -6,11 +6,17 @@ import Login from "../components/Login"
 import { useRouter } from "next/router"
 import toast, { Toaster } from "react-hot-toast"
 
-const Home = ({ isConnected, loginContext }) => {
+type HomeProps = {
+	isConnected: boolean
+	loginContext: any
+}
+
+const Home: React.FC<HomeProps> = ({ isConnected, loginContext }) => {
 	const { loggedIn, setLoggedIn, setLoggedOut } = useContext(loginContext)
 	const router = useRouter()
 
 	useEffect(() => {
+		loggedIn === true && router.push("/dashboard?loggedIn=0")
 		const { error } = router.query
 		error === "1" && toast.error("Please log in.")
 	}, [])

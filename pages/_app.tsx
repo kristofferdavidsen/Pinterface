@@ -5,12 +5,11 @@ import "../styles/globals.css"
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	const LoginContext = createContext({
-		username: null,
 		loggedIn: false,
 		setLoggedIn: () => {},
 		setLoggedOut: () => {},
 	})
-	const [loggedIn, setLoggedIn] = useState(false)
+	const [loggedIn, setLoggedIn] = useState(true)
 
 	const login = () => setLoggedIn(true)
 	const logout = () => setLoggedIn(false)
@@ -18,7 +17,6 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	return (
 		<LoginContext.Provider
 			value={{
-				username: "",
 				loggedIn: loggedIn,
 				setLoggedIn: login,
 				setLoggedOut: logout,

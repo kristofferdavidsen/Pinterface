@@ -3,9 +3,19 @@ import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import { TempList } from "../components/TempList"
+import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"
+import toast, { Toaster } from "react-hot-toast"
 
-const Dashboard = ({ temperatures, loginContext }) => {
+type DashboardProps = {
+	temperatures: Array<Temperature>
+	loginContext: any
+}
+
+const Dashboard: React.FC<DashboardProps> = ({
+	temperatures,
+	loginContext,
+}) => {
 	const router = useRouter()
 	const { loggedIn, setLoggedOut } = useContext(loginContext)
 
@@ -16,11 +26,18 @@ const Dashboard = ({ temperatures, loginContext }) => {
 	}
 
 	useEffect(() => {
+		const { loggedIn } = router.query
+		if (loggedIn === "0") {
+			toast.success("Already logged in!")
+		}
 		validateLogin()
 	}, [])
 
 	return (
 		<>
+			<div>
+				<Toaster position="top-center" />
+			</div>
 			<Navbar setLoggedOut={setLoggedOut} />
 			{loggedIn && (
 				<div className="container grid grid-cols-1 m-auto">
