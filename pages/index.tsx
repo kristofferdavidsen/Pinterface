@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { connectToDatabase } from "../util/mongodb"
-import { useContext, useEffect } from "react"
+import { useCallback, useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import Login from "../components/Login"
 import { useRouter } from "next/router"
@@ -15,10 +15,11 @@ const Home = ({ isConnected, loginContext }) => {
 		error === "1" && toast.error("Please log in.")
 	}, [])
 
+	const failedLogin = (errorMsg: string) => toast.error(errorMsg)
 	return (
 		<>
 			<div>
-				<Toaster position="bottom-center" />
+				<Toaster position="top-center" />
 			</div>
 			<Head>
 				<title>Dashboard</title>
@@ -28,7 +29,7 @@ const Home = ({ isConnected, loginContext }) => {
 				></meta>
 			</Head>
 			<Navbar setLoggedOut={setLoggedOut} />
-			<Login setLoggedIn={setLoggedIn} />
+			<Login setLoggedIn={setLoggedIn} failedLogin={failedLogin} />
 		</>
 	)
 }

@@ -1,17 +1,34 @@
+import { useRouter } from "next/router"
 import { useState } from "react"
-import { connectToDatabase } from "../util/mongodb"
+import { User } from "../interfaces/User"
 
 type LoginProps = {
-	setLoggedIn: () => boolean
+	setLoggedIn: (arg0: boolean) => boolean
+	failedLogin: (errorMsg: string) => void
 }
 
-const Login: React.FC<LoginProps> = ({ setLoggedIn }) => {
+const Login: React.FC<LoginProps> = ({ setLoggedIn, failedLogin }) => {
 	const [username, setUsername] = useState<string>()
 	const [password, setPassword] = useState<string>()
+	const router = useRouter()
 
 	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		return true
+		const user: User = { username: username, password: password }
+		const res: Response = await fetch("/api/login", {
+			method: "POST",
+			body: JSON.stringify(user),
+			mode: "no-cors",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+		if (res.ok) {
+			setLoggedIn(true)
+			router.push("/dashboard")
+		} else {
+			failedLogin("Wrong username or password")
+		}
 	}
 
 	return (
