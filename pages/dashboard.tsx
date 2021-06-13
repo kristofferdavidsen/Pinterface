@@ -26,10 +26,6 @@ const Dashboard: React.FC<DashboardProps> = ({
 	}
 
 	useEffect(() => {
-		const { loggedIn } = router.query
-		if (loggedIn === "0") {
-			toast.success("Already logged in!")
-		}
 		validateLogin()
 	}, [])
 

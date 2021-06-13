@@ -25,7 +25,7 @@ const Login: React.FC<LoginProps> = ({ setLoggedIn, failedLogin }) => {
 		})
 		if (res.ok) {
 			setLoggedIn(true)
-			router.push("/dashboard")
+			router.push("/dashboard?loggedIn=1")
 		} else {
 			failedLogin("Wrong username or password")
 		}

@@ -9,7 +9,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 		setLoggedIn: () => {},
 		setLoggedOut: () => {},
 	})
-	const [loggedIn, setLoggedIn] = useState(true)
+	const [loggedIn, setLoggedIn] = useState(false)
 
 	const login = () => setLoggedIn(true)
 	const logout = () => setLoggedIn(false)
