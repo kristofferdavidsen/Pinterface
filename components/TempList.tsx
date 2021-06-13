@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Temperature } from "../interfaces/Temperature"
+import { Card } from "../components/Card"
+import { Statistics } from "./Statistics"
 
 export const TempList: React.FC<{ temperatures: Array<Temperature> }> = ({
 	temperatures,
@@ -29,19 +31,17 @@ export const TempList: React.FC<{ temperatures: Array<Temperature> }> = ({
 			</div>
 			{active === 1 ? (
 				<div className="text-center">
-					<ul>
+					<ul className="flex flex-row flex-wrap">
 						{temperatures.map((temp: Temperature, index: number) => (
-							<li key={index}>
-								<h1>Date: {temp.date}</h1>
-								<h2>Celsius: {temp.tempCelsius}</h2>
-								<h3>Fahrenheit: {temp.tempFahrenheit}</h3>
+							<li className="p-2" key={index}>
+								<Card data={temp} />
 							</li>
 						))}
 					</ul>
 				</div>
 			) : (
 				<div className="text-center">
-					<p>Statistikk</p>
+					<Statistics temperatures={temperatures} />
 				</div>
 			)}
 		</div>
