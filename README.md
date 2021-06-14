@@ -1,7 +1,7 @@
 # Pinterface
 
 - Webside som viser informasjon som leses fra en Raspberry Pi.
-- Temperaturer, statistikk m.m.
+- Temperaturer, fuktighet, lufttrykk og diverse statistikker.
 
 ## Bibliotek og rammeverk:
 
