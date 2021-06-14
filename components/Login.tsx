@@ -32,37 +32,46 @@ const Login: React.FC<LoginProps> = ({ setLoggedIn, failedLogin }) => {
 	}
 
 	return (
-		<>
-			<div className="container">
-				<div className="">
-					<form
-						onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitLogin(e)}
-					>
-						<label>
-							Username:
+		<div
+			className={`flex flex-col rounded-lg shadow-lg overflow-hidden
+            mb-3 transition duration-500 max-w-md`}
+		>
+			<div className="flex-1 bg-white p-6 flex flex-col justify-between">
+				<form
+					onSubmit={(e: React.FormEvent<HTMLFormElement>) => submitLogin(e)}
+				>
+					<div className="grid grid-flow-row max-w-xs">
+						<label className="p-2">Username:</label>
+						<input
+							type="text"
+							name="username"
+							onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+								setUsername(e.target.value)
+							}
+							className="border-black border-2"
+						/>
+						<label className="p-2">Password:</label>
+						<input
+							type="password"
+							name="password"
+							onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+								setPassword(e.target.value)
+							}
+							className="border-black border-2"
+						/>
+					</div>
+					<div className="flex mt-6 items-center justify-between">
+						<div className="">
 							<input
-								type="text"
-								name="username"
-								onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-									setUsername(e.target.value)
-								}
+								type="submit"
+								value="Submit"
+								className="cursor-pointer rounded-md bg-gray-200 p-2 border-black border-2 active:bg-gray-400"
 							/>
-						</label>
-						<label>
-							Password:
-							<input
-								type="password"
-								name="password"
-								onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-									setPassword(e.target.value)
-								}
-							/>
-						</label>
-						<input type="submit" value="Submit" />
-					</form>
-				</div>
+						</div>
+					</div>
+				</form>
 			</div>
-		</>
+		</div>
 	)
 }
 export default Login

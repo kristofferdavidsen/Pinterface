@@ -6,6 +6,7 @@ import { TempList } from "../components/TempList"
 import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"
 import toast, { Toaster } from "react-hot-toast"
+import Head from "next/head"
 
 type DashboardProps = {
 	temperatures: Array<Temperature>
@@ -31,6 +32,10 @@ const Dashboard: React.FC<DashboardProps> = ({
 
 	return (
 		<>
+			<Head>
+				<title>Dashboard</title>
+				<meta name="viewport" content="initial-scale:1.0, width=device-width" />
+			</Head>
 			<div>
 				<Toaster position="top-center" />
 			</div>
@@ -53,5 +58,6 @@ export const getStaticProps: GetStaticProps = async (context: any) => {
 		props: {
 			temperatures: JSON.parse(JSON.stringify(temps)),
 		},
+		revalidate: 10,
 	}
 }

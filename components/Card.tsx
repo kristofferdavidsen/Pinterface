@@ -1,3 +1,5 @@
+import formatDate from "../util/dateFormatting"
+
 type CardProps = {
 	data: {
 		date: Date
@@ -8,10 +10,6 @@ type CardProps = {
 }
 
 export const Card: React.FC<CardProps> = ({ data }) => {
-	const formatDate = (date: Date) => {
-		return `Dato: ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}, kl. ${date.getHours()}.${date.getMinutes()}`
-	}
-
 	return (
 		<div
 			className={`flex flex-col rounded-lg shadow-lg overflow-hidden
