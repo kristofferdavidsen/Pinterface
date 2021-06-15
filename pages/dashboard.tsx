@@ -20,15 +20,11 @@ const Dashboard: React.FC<DashboardProps> = ({
 	const router = useRouter()
 	const { loggedIn, setLoggedOut } = useContext(loginContext)
 
-	const validateLogin = () => {
+	useEffect(() => {
 		if (!loggedIn) {
 			router.push("/?error=1")
 		}
-	}
-
-	useEffect(() => {
-		validateLogin()
-	}, [])
+	}, [loggedIn, router])
 
 	return (
 		<>

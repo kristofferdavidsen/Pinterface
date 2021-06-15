@@ -1,7 +1,8 @@
 import { AppProps } from "next/app"
-import { createContext, useState } from "react"
+import React, { createContext, useState } from "react"
 import "tailwindcss/tailwind.css"
 import "../styles/globals.css"
+import { ChakraProvider } from "@chakra-ui/react"
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	const LoginContext = createContext({
@@ -15,15 +16,17 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	const logout = () => setLoggedIn(false)
 
 	return (
-		<LoginContext.Provider
-			value={{
-				loggedIn: loggedIn,
-				setLoggedIn: login,
-				setLoggedOut: logout,
-			}}
-		>
-			<Component {...pageProps} loginContext={LoginContext} />
-		</LoginContext.Provider>
+		<ChakraProvider>
+			<LoginContext.Provider
+				value={{
+					loggedIn: loggedIn,
+					setLoggedIn: login,
+					setLoggedOut: logout,
+				}}
+			>
+				<Component {...pageProps} loginContext={LoginContext} />
+			</LoginContext.Provider>
+		</ChakraProvider>
 	)
 }
 export default MyApp

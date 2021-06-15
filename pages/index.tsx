@@ -1,6 +1,5 @@
 import Head from "next/head"
-import { connectToDatabase } from "../util/mongodb"
-import { useCallback, useContext, useEffect } from "react"
+import { useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import Login from "../components/Login"
 import { useRouter } from "next/router"
@@ -60,7 +59,7 @@ const Home: React.FC<HomeProps> = ({ loginContext }) => {
 
 		const { error } = router.query
 		error === "1" && toast.error("Please log in.")
-	}, [])
+	}, [loggedIn, router])
 
 	const failedLogin = (errorMsg: string) => toast.error(errorMsg)
 	return (
