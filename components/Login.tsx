@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { User } from "../interfaces/User"
+import { UserLogin } from "../interfaces/UserLogin"
+import sanitize from "sanitize-html-react"
 
 type LoginProps = {
 	setLoggedIn: (arg0: boolean) => boolean
@@ -14,7 +15,10 @@ const Login: React.FC<LoginProps> = ({ setLoggedIn, failedLogin }) => {
 
 	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		const user: User = { username: username, password: password }
+		const user: UserLogin = {
+			username: sanitize(username),
+			password: sanitize(password),
+		}
 		const res: Response = await fetch("/api/login", {
 			method: "POST",
 			body: JSON.stringify(user),
