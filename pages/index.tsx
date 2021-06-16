@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
-import Login from "../components/Login"
+import Login from "../components/login/Login"
 import { useRouter } from "next/router"
 import toast, { Toaster } from "react-hot-toast"
 
@@ -16,7 +16,6 @@ const Home: React.FC<HomeProps> = ({ loginContext }) => {
 
 	useEffect(() => {
 		loggedIn === true && router.push("/dashboard")
-
 		const cookieItem = window.localStorage.getItem("cookie-info")
 		if (!cookieItem) {
 			toast(
@@ -75,7 +74,7 @@ const Home: React.FC<HomeProps> = ({ loginContext }) => {
 				></meta>
 			</Head>
 			<Navbar setLoggedOut={setLoggedOut} />
-			<div className="justify-center items-center m-auto max-w-7xl">
+			<div className="justify-center items-center m-auto">
 				<Login setLoggedIn={setLoggedIn} failedLogin={failedLogin} />
 			</div>
 		</div>
