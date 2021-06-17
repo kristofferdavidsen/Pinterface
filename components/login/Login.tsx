@@ -1,15 +1,17 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Box, useColorModeValue, Heading, Text } from "@chakra-ui/react"
 import Link from "next/link"
 import { LoginCard } from "./LoginCard"
 import { LoginForm } from "./LoginForm"
+import { LoginContext } from "../../pages/_app"
 
 type LoginProps = {
-	setLoggedIn: (arg0: boolean) => boolean
 	failedLogin: (errorMsg: string) => void
 }
 
-const Login: React.FC<LoginProps> = ({ setLoggedIn, failedLogin }) => {
+const Login: React.FC<LoginProps> = ({ failedLogin }) => {
+	const { setLoggedIn } = useContext(LoginContext)
+
 	return (
 		<Box
 			bg={useColorModeValue("azure", "inherit")}

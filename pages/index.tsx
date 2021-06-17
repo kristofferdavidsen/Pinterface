@@ -1,21 +1,10 @@
-import Head from "next/head"
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import Navbar from "../components/Navbar"
-import Login from "../components/login/Login"
-import { useRouter } from "next/router"
 import toast, { Toaster } from "react-hot-toast"
+import Head from "next/head"
 
-type HomeProps = {
-	isConnected: boolean
-	loginContext: any
-}
-
-const Home: React.FC<HomeProps> = ({ loginContext }) => {
-	const { loggedIn, setLoggedIn, setLoggedOut } = useContext(loginContext)
-	const router = useRouter()
-
+const Home: React.FC = () => {
 	useEffect(() => {
-		loggedIn === true && router.push("/dashboard")
 		const cookieItem = window.localStorage.getItem("cookie-info")
 		if (!cookieItem) {
 			toast(
@@ -55,29 +44,23 @@ const Home: React.FC<HomeProps> = ({ loginContext }) => {
 			)
 			window.localStorage.setItem("cookie-info", String(true))
 		}
+	})
 
-		const { error } = router.query
-		error === "1" && toast.error("Please log in.")
-	}, [loggedIn, router])
-
-	const failedLogin = (errorMsg: string) => toast.error(errorMsg)
 	return (
-		<div>
+		<>
 			<div>
 				<Toaster position="top-center" />
 			</div>
 			<Head>
-				<title>Index</title>
+				<title>Index - Pinterface</title>
 				<meta
 					name="viewport"
 					content="initial-scale:1.0, width=device-width"
 				></meta>
 			</Head>
-			<Navbar setLoggedOut={setLoggedOut} />
-			<div className="justify-center items-center m-auto">
-				<Login setLoggedIn={setLoggedIn} failedLogin={failedLogin} />
-			</div>
-		</div>
+			<Navbar />
+			<p>Home</p>
+		</>
 	)
 }
 export default Home

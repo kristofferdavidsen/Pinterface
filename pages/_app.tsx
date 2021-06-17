@@ -5,11 +5,6 @@ import "../styles/globals.css"
 import { ChakraProvider } from "@chakra-ui/react"
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-	const LoginContext = createContext({
-		loggedIn: false,
-		setLoggedIn: () => {},
-		setLoggedOut: () => {},
-	})
 	const [loggedIn, setLoggedIn] = useState(false)
 
 	const login = () => setLoggedIn(true)
@@ -30,3 +25,9 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 	)
 }
 export default MyApp
+
+export const LoginContext = createContext({
+	loggedIn: false,
+	setLoggedIn: () => {},
+	setLoggedOut: () => {},
+})

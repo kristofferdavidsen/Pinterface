@@ -12,7 +12,7 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 
 type LoginProps = {
-	setLoggedIn: (arg0: boolean) => boolean
+	setLoggedIn: (arg0: boolean) => void
 	failedLogin: (errorMsg: string) => void
 }
 
