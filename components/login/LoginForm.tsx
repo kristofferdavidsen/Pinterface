@@ -5,6 +5,7 @@ import {
 	FormLabel,
 	Input,
 	Button,
+	CircularProgress,
 } from "@chakra-ui/react"
 import { UserLogin } from "../../interfaces/UserLogin"
 import sanitize from "sanitize-html-react"
@@ -22,10 +23,12 @@ export const LoginForm: React.FC<LoginProps> = ({
 }) => {
 	const [username, setUsername] = useState<string>()
 	const [password, setPassword] = useState<string>()
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const router = useRouter()
 
 	const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
+		setIsLoading(true)
 		const user: UserLogin = {
 			username: sanitize(username),
 			password: sanitize(password),
@@ -40,9 +43,12 @@ export const LoginForm: React.FC<LoginProps> = ({
 		})
 		if (res.ok) {
 			setLoggedIn(true)
-			router.push("/dashboard")
+			setTimeout(() => {
+				router.push("/dashboard")
+			}, 500)
 		} else {
 			failedLogin("Wrong username or password")
+			setIsLoading(false)
 		}
 	}
 
@@ -68,7 +74,11 @@ export const LoginForm: React.FC<LoginProps> = ({
 					/>
 				</FormControl>
 				<Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-					Submit
+					{isLoading ? (
+						<CircularProgress isIndeterminate color="azure" />
+					) : (
+						"Log in"
+					)}
 				</Button>
 			</Stack>
 		</chakra.form>

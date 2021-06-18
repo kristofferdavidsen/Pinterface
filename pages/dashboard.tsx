@@ -1,13 +1,13 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next"
+import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import { TempList } from "../components/TempList"
 import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"
-import { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import { LoginContext } from "./_app"
+import { CircularProgress, Box, useColorModeValue } from "@chakra-ui/react"
 
 type DashboardProps = {
 	temperatures: Array<Temperature>
@@ -29,19 +29,31 @@ const Dashboard: React.FC<DashboardProps> = ({ temperatures }) => {
 				<title>Dashboard - Pinterface</title>
 				<meta name="viewport" content="initial-scale:1.0, width=device-width" />
 			</Head>
-			<div>
-				<Toaster position="top-center" />
-			</div>
 			<Navbar />
-			<div className="container grid grid-cols-1 m-auto">
-				<TempList temperatures={temperatures} />
-			</div>
+			<Box
+				bg={useColorModeValue("azure", "inherit")}
+				minH="100vh"
+				py="12"
+				px={{ base: "4", lg: "8" }}
+			>
+				{loggedIn ? (
+					<>
+						<div className="container grid grid-cols-1 m-auto">
+							<TempList temperatures={temperatures} />
+						</div>
+					</>
+				) : (
+					<>
+						<CircularProgress isIndeterminate size="xl" />
+					</>
+				)}
+			</Box>
 		</>
 	)
 }
 export default Dashboard
 
-export const getStaticProps: GetStaticProps = async (context: any) => {
+export const getStaticProps: GetStaticProps = async () => {
 	const { db } = await connectToDatabase()
 	const temps = await db.collection("temperatur").find({}).toArray()
 

@@ -7,6 +7,7 @@ import {
 	Stack,
 	FormErrorMessage,
 	Button,
+	CircularProgress,
 } from "@chakra-ui/react"
 import { useState } from "react"
 
@@ -15,15 +16,11 @@ import { useState } from "react"
  */
 
 export const RegistrationForm: React.FC = () => {
-	const [username, setUsername] = useState("")
-	const [password, setPassword] = useState("")
-	const [passwordrepeat, setPasswordrepeat] = useState("")
-	const [email, setEmail] = useState("")
-
-	//TODO
-	const checkUsername = (username: string): boolean => {
-		return false
-	}
+	const [username, setUsername] = useState<string>("")
+	const [password, setPassword] = useState<string>("")
+	const [passwordrepeat, setPasswordrepeat] = useState<string>("")
+	const [email, setEmail] = useState<string>("")
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 
 	return (
 		<chakra.form>
@@ -48,7 +45,9 @@ export const RegistrationForm: React.FC = () => {
 					<Input
 						type="email"
 						placeholder="Email"
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={(e) => {
+							setEmail(e.target.value)
+						}}
 					/>
 					<FormHelperText>
 						Add your email for alert purposes, not required.
@@ -61,7 +60,9 @@ export const RegistrationForm: React.FC = () => {
 						isRequired
 						placeholder="Password"
 						type="password"
-						onChange={(e) => setPassword(e.target.value)}
+						onChange={(e) => {
+							setPassword(e.target.value)
+						}}
 					/>
 					<FormHelperText> Minimum 8, maximum 25 characters.</FormHelperText>
 					<FormErrorMessage>
@@ -74,12 +75,18 @@ export const RegistrationForm: React.FC = () => {
 						isRequired
 						placeholder="Repeat password"
 						type="password"
-						onChange={(e) => setPasswordrepeat(e.target.value)}
+						onChange={(e) => {
+							setPasswordrepeat(e.target.value)
+						}}
 					/>
 					<FormErrorMessage>Passwords are not equal.</FormErrorMessage>
 				</FormControl>
 				<Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-					Submit
+					{isLoading ? (
+						<CircularProgress isIndeterminate size="24px" />
+					) : (
+						"Submit"
+					)}
 				</Button>
 			</Stack>
 		</chakra.form>
