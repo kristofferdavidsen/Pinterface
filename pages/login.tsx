@@ -12,6 +12,7 @@ const LoginPage: React.FC = () => {
 	const { loggedIn } = useContext(LoginContext)
 	const router: NextRouter = useRouter()
 	const toast = useToast()
+
 	useEffect(() => {
 		loggedIn === true && router.push("/dashboard")
 		const { error, red } = router.query
