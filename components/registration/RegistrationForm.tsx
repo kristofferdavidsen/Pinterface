@@ -9,11 +9,13 @@ import {
 	Button,
 	CircularProgress,
 	useToast,
+	useDisclosure,
 } from "@chakra-ui/react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import bcryptjs from "bcryptjs"
 import { UserLogin } from "../../interfaces/UserLogin"
 import { User } from "../../interfaces/User"
+import { ConfirmationModal } from "./ConfirmationModal"
 
 export const RegistrationForm: React.FC = () => {
 	const [username, setUsername] = useState<string>("")
@@ -26,6 +28,9 @@ export const RegistrationForm: React.FC = () => {
 	const [validRepPassword, setValidRepPassword] = useState<boolean>(true)
 	const [validEmail, setValidemail] = useState<boolean>(true)
 	const toast = useToast()
+
+	const ref = useRef()
+	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	const checkUsername = (value: string): void => {
 		setUsername(value)
@@ -100,8 +105,13 @@ export const RegistrationForm: React.FC = () => {
 		}
 	}
 
+	const openModal = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		onOpen()
+	}
+
 	return (
-		<chakra.form>
+		<chakra.form onSubmit={(e) => openModal(e)}>
 			<Stack>
 				<FormControl id="username">
 					<FormLabel as="legend">Choose a username</FormLabel>
@@ -173,6 +183,15 @@ export const RegistrationForm: React.FC = () => {
 					)}
 				</Button>
 			</Stack>
+			<ConfirmationModal
+				isOpen={isOpen}
+				onClose={onClose}
+				submit={submitRegistration}
+				data={{
+					username: username,
+					email: email,
+				}}
+			/>
 		</chakra.form>
 	)
 }
