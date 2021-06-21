@@ -7,29 +7,29 @@ import {
 	Stack,
 	FormErrorMessage,
 	Button,
-	CircularProgress,
 	useToast,
 	useDisclosure,
 } from "@chakra-ui/react"
-import { useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import bcryptjs from "bcryptjs"
 import { UserLogin } from "../../interfaces/UserLogin"
 import { User } from "../../interfaces/User"
 import { ConfirmationModal } from "./ConfirmationModal"
+import { useRouter } from "next/router"
 
 export const RegistrationForm: React.FC = () => {
 	const [username, setUsername] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
 	const [passwordrepeat, setPasswordrepeat] = useState<string>("")
 	const [email, setEmail] = useState<string>("")
-	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [validUsername, setValidusername] = useState<boolean>(true)
 	const [validPassword, setValidPassword] = useState<boolean>(true)
 	const [validRepPassword, setValidRepPassword] = useState<boolean>(true)
 	const [validEmail, setValidemail] = useState<boolean>(true)
 	const toast = useToast()
+	let outcome: boolean
+	const router = useRouter()
 
-	const ref = useRef()
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	const checkUsername = (value: string): void => {
@@ -40,6 +40,7 @@ export const RegistrationForm: React.FC = () => {
 	}
 
 	const checkEmail = (value: string): void => {
+		setEmail(value)
 		if (value.length === 0) {
 			setValidemail(true)
 			return
@@ -50,6 +51,21 @@ export const RegistrationForm: React.FC = () => {
 	}
 
 	//password-validation
+
+	useEffect(() => {
+		if (outcome === true) {
+			toast({
+				title: "Success!",
+				description: "Redirecting...",
+				duration: 2000,
+				status: "success",
+				position: "top",
+			})
+			setTimeout(() => {
+				router.push("/login?reg=0")
+			}, 1000)
+		}
+	}, [outcome, router, toast])
 
 	const submitRegistration = async () => {
 		if (validUsername && validPassword && validRepPassword && validEmail) {
@@ -88,6 +104,7 @@ export const RegistrationForm: React.FC = () => {
 				if (userres.status === 500) {
 					Error(await userres.json())
 				}
+				outcome = true
 			} catch (e: any) {
 				toast({
 					title: e.message ?? "An error occurred during registration.",
@@ -95,6 +112,7 @@ export const RegistrationForm: React.FC = () => {
 					status: "error",
 					position: "top",
 				})
+				outcome = false
 			}
 		} else {
 			toast({
@@ -176,11 +194,7 @@ export const RegistrationForm: React.FC = () => {
 					)}
 				</FormControl>
 				<Button type="submit" colorScheme="blue" size="lg" fontSize="md">
-					{isLoading ? (
-						<CircularProgress isIndeterminate color="azure" />
-					) : (
-						"Submit"
-					)}
+					Submit
 				</Button>
 			</Stack>
 			<ConfirmationModal

@@ -7,7 +7,9 @@ import {
 	ModalFooter,
 	Text,
 	Button,
+	CircularProgress,
 } from "@chakra-ui/react"
+import { useState } from "react"
 
 type ModalProps = {
 	isOpen: boolean
@@ -25,6 +27,8 @@ export const ConfirmationModal: React.FC<ModalProps> = ({
 	submit,
 	data,
 }) => {
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
 	return (
 		<>
 			<Modal onClose={onClose} isOpen={isOpen}>
@@ -40,8 +44,18 @@ export const ConfirmationModal: React.FC<ModalProps> = ({
 						</Text>
 					</ModalBody>
 					<ModalFooter>
-						<Button colorScheme="blue" onClick={submit}>
-							Confirm
+						<Button
+							colorScheme="blue"
+							onClick={() => {
+								submit()
+								onClose()
+							}}
+						>
+							{isLoading ? (
+								<CircularProgress isIndeterminate color="azure" />
+							) : (
+								"Confirm"
+							)}
 						</Button>
 						<Button onClick={onClose} variant="ghost">
 							Cancel

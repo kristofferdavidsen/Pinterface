@@ -50,8 +50,6 @@ export const LoginForm: React.FC<LoginProps> = ({
 		e.preventDefault()
 		setIsLoading(true)
 
-		//TODO: bcrypt
-
 		const user: UserLogin = {
 			username: username,
 			password: password,

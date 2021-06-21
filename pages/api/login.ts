@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { connectToDatabase } from "../../util/mongodb"
 import { setCookie } from "../../util/setCookie"
+import bcrypt from "bcryptjs"
 
 export default async function handler(
 	req: NextApiRequest,
@@ -10,16 +11,21 @@ export default async function handler(
 	const body = JSON.parse(req.body)
 	const exist = await db
 		.collection("login")
-		.findOne({ username: body.username, password: body.password })
+		.findOne({ username: body.username })
 	if (exist) {
-		setCookie(res, "login", true, {
-			httpOnly: false,
-			maxAge: 1000000000,
-			sameSite: "lax",
-			secure: true,
-		})
-		res.status(200).end(res.getHeader("Set-Cookie"))
+		const eq = await bcrypt.compare(body.password, exist.password)
+		if (eq) {
+			setCookie(res, "login", true, {
+				httpOnly: false,
+				maxAge: 1000000000,
+				sameSite: "lax",
+				secure: true,
+			})
+			res.status(200).end(res.getHeader("Set-Cookie"))
+		} else {
+			res.status(401).end()
+		}
 	} else {
-		res.status(404).end()
+		res.status(401).end()
 	}
 }
