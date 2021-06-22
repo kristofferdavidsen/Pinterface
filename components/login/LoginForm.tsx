@@ -99,7 +99,7 @@ export const LoginForm: React.FC<LoginProps> = ({
 				)}
 				<Button type="submit" colorScheme="blue" size="lg" fontSize="md">
 					{isLoading ? (
-						<CircularProgress isIndeterminate color="azure" />
+						<CircularProgress isIndeterminate className="p-2" color="#EDF5FA" />
 					) : flag ? (
 						"Log in"
 					) : (

@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import Navbar from "../components/Navbar"
+import { Navbar } from "../components/navbar/Navbar"
 import Head from "next/head"
 import { useToast } from "@chakra-ui/toast"
 import { Box } from "@chakra-ui/layout"
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
 			</Head>
 			<Navbar />
 			<Box
-				bg={useColorModeValue("azure", "inherit")}
+				bg={useColorModeValue("#EDF5FA", "inherit")}
 				minH="100vh"
 				py="12"
 				px={{ base: "4", lg: "8" }}

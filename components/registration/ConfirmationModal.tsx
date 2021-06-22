@@ -52,7 +52,11 @@ export const ConfirmationModal: React.FC<ModalProps> = ({
 							}}
 						>
 							{isLoading ? (
-								<CircularProgress isIndeterminate color="azure" />
+								<CircularProgress
+									isIndeterminate
+									className="p-2"
+									color="#EDF5FA"
+								/>
 							) : (
 								"Confirm"
 							)}

@@ -3,7 +3,7 @@
 import { NextRouter, useRouter } from "next/router"
 import { useContext, useEffect } from "react"
 import Head from "next/head"
-import Navbar from "../components/Navbar"
+import { Navbar } from "../components/navbar/Navbar"
 import Login from "../components/login/Login"
 import { LoginContext } from "../pages/_app"
 import { useToast } from "@chakra-ui/react"

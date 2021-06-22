@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
-import Navbar from "../components/Navbar"
+import { Navbar } from "../components/navbar/Navbar"
 import { TempList } from "../components/TempList"
 import { Temperature } from "../interfaces/Temperature"
 import { connectToDatabase } from "../util/mongodb"

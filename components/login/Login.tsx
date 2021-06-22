@@ -14,7 +14,7 @@ const Login: React.FC<LoginProps> = ({ failedLogin }) => {
 
 	return (
 		<Box
-			bg={useColorModeValue("azure", "inherit")}
+			bg={useColorModeValue("#EDF5FA", "inherit")}
 			minH="100vh"
 			py="12"
 			px={{ base: "4", lg: "8" }}
