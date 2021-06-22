@@ -4,6 +4,11 @@ import { Logo } from "./Logo"
 import { MenuToggle } from "./MenuToggle"
 import { MenuLinks } from "./MenuLinks"
 
+/*
+ * The navbar is inspired by this blog-post:
+ * https://raptis.wtf/blog/create-a-navbar-with-chakra-ui-react/
+ *
+ */
 export const Navbar: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const toggle = () => setIsOpen(!isOpen)
