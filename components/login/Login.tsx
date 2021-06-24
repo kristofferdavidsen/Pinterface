@@ -10,7 +10,6 @@ type LoginProps = {
 }
 
 const Login: React.FC<LoginProps> = ({ failedLogin }) => {
-	const { setLoggedIn } = useContext(LoginContext)
 
 	return (
 		<Box
@@ -28,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ failedLogin }) => {
 					<Link href="/register">Register here.</Link>
 				</Text>
 				<LoginCard>
-					<LoginForm setLoggedIn={setLoggedIn} failedLogin={failedLogin} />
+					<LoginForm failedLogin={failedLogin} />
 				</LoginCard>
 			</Box>
 		</Box>

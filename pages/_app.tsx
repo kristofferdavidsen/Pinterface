@@ -5,15 +5,19 @@ import "../styles/globals.css"
 import { ChakraProvider } from "@chakra-ui/react"
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-	const [loggedIn, setLoggedIn] = useState(false)
+	const [loggedIn, setLoggedIn] = useState<boolean>(false)
+	const [username, setUsername] = useState<string>(null)
 
 	const login = () => setLoggedIn(true)
 	const logout = () => setLoggedIn(false)
+	const user = (s: string) => setUsername(s)
 
 	return (
 		<ChakraProvider>
 			<LoginContext.Provider
 				value={{
+					setUser: user,
+					user: username,
 					loggedIn: loggedIn,
 					setLoggedIn: login,
 					setLoggedOut: logout,
@@ -27,6 +31,8 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 export default MyApp
 
 export const LoginContext = createContext({
+	setUser: (s: string) => {},
+	user: null,
 	loggedIn: false,
 	setLoggedIn: () => {},
 	setLoggedOut: () => {},

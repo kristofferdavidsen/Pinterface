@@ -1,6 +1,6 @@
 import { Box, Heading, useColorModeValue } from "@chakra-ui/react"
 import { RegistrationForm } from "./RegistrationForm"
-import { RegistrationCard } from "./RegistrationCard"
+import { Card } from "../Card"
 
 export const Registration: React.FC = () => {
 	return (
@@ -20,9 +20,9 @@ export const Registration: React.FC = () => {
 				>
 					Register a new account
 				</Heading>
-				<RegistrationCard>
+				<Card>
 					<RegistrationForm />
-				</RegistrationCard>
+				</Card>
 			</Box>
 		</Box>
 	)

@@ -10,19 +10,18 @@ import {
 	useToast,
 } from "@chakra-ui/react"
 import { UserLogin } from "../../interfaces/UserLogin"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useRouter } from "next/router"
-import bcrypt from "bcryptjs"
+import { LoginContext } from "../../pages/_app"
 
 type LoginProps = {
-	setLoggedIn: (arg0: boolean) => void
 	failedLogin: (errorMsg: string) => void
 }
 
 export const LoginForm: React.FC<LoginProps> = ({
-	setLoggedIn,
 	failedLogin,
 }) => {
+	const { setLoggedIn, setUser } = useContext(LoginContext)
 	const [username, setUsername] = useState<string>()
 	const [password, setPassword] = useState<string>()
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -64,7 +63,8 @@ export const LoginForm: React.FC<LoginProps> = ({
 			},
 		})
 		if (res.ok) {
-			setLoggedIn(true)
+			setLoggedIn()
+			setUser(username)
 			setTimeout(() => {
 				router.push("/dashboard")
 			}, 500)

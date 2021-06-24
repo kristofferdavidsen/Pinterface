@@ -1,19 +1,16 @@
-import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useContext, useEffect } from "react"
 import { Navbar } from "../components/navbar/Navbar"
-import { TempList } from "../components/TempList"
-import { Temperature } from "../interfaces/Temperature"
-import { connectToDatabase } from "../util/mongodb"
+import { Dashboard } from "../components/dashboard/Dashboard"
 import Head from "next/head"
 import { LoginContext } from "./_app"
 import { CircularProgress, Box, useColorModeValue } from "@chakra-ui/react"
 
 type DashboardProps = {
-	temperatures: Array<Temperature>
+	
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ temperatures }) => {
+const DashboardPage: React.FC<DashboardProps> = () => {
 	const router = useRouter()
 	const { loggedIn } = useContext(LoginContext)
 
@@ -37,11 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({ temperatures }) => {
 				px={{ base: "4", lg: "8" }}
 			>
 				{loggedIn ? (
-					<>
-						<div className="container grid grid-cols-1 m-auto">
-							<TempList temperatures={temperatures} />
-						</div>
-					</>
+					<Dashboard/>
 				) : (
 					<>
 						<CircularProgress isIndeterminate size="xl" />
@@ -51,16 +44,4 @@ const Dashboard: React.FC<DashboardProps> = ({ temperatures }) => {
 		</>
 	)
 }
-export default Dashboard
-
-export const getStaticProps: GetStaticProps = async () => {
-	const { db } = await connectToDatabase()
-	const temps = await db.collection("temperatur").find({}).toArray()
-
-	return {
-		props: {
-			temperatures: JSON.parse(JSON.stringify(temps)),
-		},
-		revalidate: 10,
-	}
-}
+export default DashboardPage
