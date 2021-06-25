@@ -9,7 +9,7 @@ import { MenuLinks } from "./MenuLinks"
  * https://raptis.wtf/blog/create-a-navbar-with-chakra-ui-react/
  *
  */
-export const Navbar: React.FC = () => {
+export const Navbar: React.FC<{ profile?: any }> = ({ profile }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const toggle = () => setIsOpen(!isOpen)
 
@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
 		>
 			<Logo />
 			<MenuToggle isOpen={isOpen} toggle={toggle} />
-			<MenuLinks isOpen={isOpen} />
+			<MenuLinks isOpen={isOpen} profile={profile} />
 		</Flex>
 	)
 }

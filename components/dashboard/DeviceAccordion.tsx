@@ -10,7 +10,6 @@ import { Device } from "../../interfaces/Device"
 
 type DevAccProps = {
 	devices: Array<Device>
-	isLoading: boolean
 }
 
 const DeviceItem: React.FC<{ id: string }> = ({ id }) => {
@@ -32,10 +31,7 @@ const DeviceItem: React.FC<{ id: string }> = ({ id }) => {
 	)
 }
 
-export const DeviceAccordion: React.FC<DevAccProps> = ({
-	devices,
-	isLoading,
-}) => {
+export const DeviceAccordion: React.FC<DevAccProps> = ({ devices }) => {
 	return (
 		<Accordion>
 			{devices.map((device, index) => (

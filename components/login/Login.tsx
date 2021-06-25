@@ -3,14 +3,12 @@ import { Box, useColorModeValue, Heading, Text } from "@chakra-ui/react"
 import Link from "next/link"
 import { LoginCard } from "./LoginCard"
 import { LoginForm } from "./LoginForm"
-import { LoginContext } from "../../pages/_app"
 
 type LoginProps = {
 	failedLogin: (errorMsg: string) => void
 }
 
 const Login: React.FC<LoginProps> = ({ failedLogin }) => {
-
 	return (
 		<Box
 			bg={useColorModeValue("#EDF5FA", "inherit")}

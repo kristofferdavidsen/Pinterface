@@ -12,16 +12,13 @@ import {
 import { UserLogin } from "../../interfaces/UserLogin"
 import { useContext, useState } from "react"
 import { useRouter } from "next/router"
-import { LoginContext } from "../../pages/_app"
+import Cookies from "js-cookie"
 
 type LoginProps = {
 	failedLogin: (errorMsg: string) => void
 }
 
-export const LoginForm: React.FC<LoginProps> = ({
-	failedLogin,
-}) => {
-	const { setLoggedIn, setUser } = useContext(LoginContext)
+export const LoginForm: React.FC<LoginProps> = ({ failedLogin }) => {
 	const [username, setUsername] = useState<string>()
 	const [password, setPassword] = useState<string>()
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -62,9 +59,9 @@ export const LoginForm: React.FC<LoginProps> = ({
 				"Content-Type": "application/json",
 			},
 		})
-		if (res.ok) {
-			setLoggedIn()
-			setUser(username)
+		const body = await res.json()
+		if (body.success && body.token) {
+			Cookies.set("token", body.token)
 			setTimeout(() => {
 				router.push("/dashboard")
 			}, 500)

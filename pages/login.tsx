@@ -1,20 +1,17 @@
 /* eslint-disable */
 
 import { NextRouter, useRouter } from "next/router"
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import Head from "next/head"
 import { Navbar } from "../components/navbar/Navbar"
 import Login from "../components/login/Login"
-import { LoginContext } from "../pages/_app"
 import { useToast } from "@chakra-ui/react"
 
 const LoginPage: React.FC = () => {
-	const { loggedIn } = useContext(LoginContext)
 	const router: NextRouter = useRouter()
 	const toast = useToast()
 
 	useEffect(() => {
-		loggedIn === true && router.push("/dashboard")
 		const { error, red } = router.query
 		if (error === "1" && red === "dashboard") {
 			toast({

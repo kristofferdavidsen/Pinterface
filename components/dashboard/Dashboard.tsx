@@ -5,17 +5,13 @@ import {
 	Heading,
 	useColorModeValue,
 } from "@chakra-ui/react"
-import { useContext } from "react"
-import { LoginContext } from "../../pages/_app"
-import { useUser } from "../../util/swr"
 import { DeviceAccordion } from "./DeviceAccordion"
 
-type DashboardProps = {}
+type DashboardProps = {
+	devices: Array<any>
+}
 
-export const Dashboard: React.FC<DashboardProps> = () => {
-	const { user } = useContext(LoginContext)
-	const { devices, isLoading, isError } = useUser(user)
-
+export const Dashboard: React.FC<DashboardProps> = ({ devices }) => {
 	return (
 		<Box
 			bg={useColorModeValue("EDF5FA", "inherit")}
@@ -33,15 +29,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
 				>
 					Dashboard
 				</Heading>
-				{isLoading ? (
-					<Stack>
-						<Skeleton height="20px" />
-						<Skeleton height="20px" />
-						<Skeleton height="20px" />
-					</Stack>
-				) : (
-					<DeviceAccordion devices={devices} isLoading={isLoading} />
-				)}
+				<DeviceAccordion devices={devices} />
 			</Box>
 		</Box>
 	)

@@ -1,17 +1,23 @@
 import { Stack, Box } from "@chakra-ui/react"
-import React, { useContext } from "react"
-import { LoginContext } from "../../pages/_app"
+import { useRouter } from "next/router"
+import React from "react"
 import { MenuItem } from "./MenuItem"
+import Cookies from "js-cookie"
 
 type MenuLinksProps = {
 	isOpen: boolean
+	profile: any
 }
 
-export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen }) => {
-	const { loggedIn, setLoggedOut } = useContext(LoginContext)
+export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, profile }) => {
+	const router = useRouter()
+	const setLoggedOut = () => {
+		Cookies.remove("token")
+		router.push("/?loggedout=0", "/")
+	}
 
 	const LoggedInIcon: React.FC = () => {
-		return !loggedIn ? (
+		return !profile ? (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				className="h-6 w-6"
