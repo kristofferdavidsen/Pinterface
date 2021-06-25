@@ -5,8 +5,6 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	Box,
-	Stack,
-	Skeleton,
 } from "@chakra-ui/react"
 import { Device } from "../../interfaces/Device"
 
@@ -39,20 +37,10 @@ export const DeviceAccordion: React.FC<DevAccProps> = ({
 	isLoading,
 }) => {
 	return (
-		<>
-			{isLoading ? (
-				<Stack>
-					<Skeleton height="20px" />
-					<Skeleton height="20px" />
-					<Skeleton height="20px" />
-				</Stack>
-			) : (
-				<Accordion>
-					{devices.map((device, index) => (
-						<DeviceItem id={device.deviceId} key={index} />
-					))}
-				</Accordion>
-			)}
-		</>
+		<Accordion>
+			{devices.map((device, index) => (
+				<DeviceItem id={device.deviceId} key={index} />
+			))}
+		</Accordion>
 	)
 }
