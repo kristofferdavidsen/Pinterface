@@ -33,19 +33,14 @@ const LoginPage: React.FC = () => {
 		})
 	}
 	return (
-		<div>
+		<>
 			<Head>
 				<title>Login - Pinterface</title>
-				<meta
-					name="viewport"
-					content="initial-scale:1.0, width=device-width"
-				></meta>
+				<meta name="viewport" content="width=device-width"></meta>
 			</Head>
 			<Navbar />
-			<div className="justify-center items-center m-auto">
-				<Login failedLogin={failedLogin} />
-			</div>
-		</div>
+			<Login failedLogin={failedLogin} />
+		</>
 	)
 }
 export default LoginPage

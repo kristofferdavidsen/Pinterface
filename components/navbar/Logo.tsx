@@ -1,14 +1,20 @@
-import { Box, Text } from "@chakra-ui/react"
-import Link from "next/link"
+import { Link, Button } from "@chakra-ui/react"
+import NextLink from "next/link"
 
 export const Logo: React.FC = (props: any) => {
 	return (
-		<Box {...props}>
-			<Link href="/" passHref>
-				<Text fontSize="lg" fontWeight="bold" cursor="pointer">
-					Pinterface
-				</Text>
-			</Link>
-		</Box>
+		<NextLink href="/" passHref>
+			<Button
+				as={Link}
+				display="block"
+				color="inherit"
+				fontSize="xl"
+				variant="unstyled"
+				fontWeight="bold"
+				aria-label="Home page"
+			>
+				Pinterface
+			</Button>
+		</NextLink>
 	)
 }

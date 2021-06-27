@@ -1,13 +1,13 @@
 import { useRouter } from "next/router"
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import { Navbar } from "../components/navbar/Navbar"
 import { Dashboard } from "../components/dashboard/Dashboard"
 import Head from "next/head"
-import { CircularProgress, Box, useColorModeValue } from "@chakra-ui/react"
 import { GetServerSidePropsContext } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { getAppCookies, verifyToken } from "../util/jwttoken"
 import { connectToDatabase } from "../util/mongodb"
+import { CircularProgress } from "@chakra-ui/react"
 
 type DashboardProps = {
 	profile: any
@@ -26,23 +26,16 @@ const DashboardPage: React.FC<DashboardProps> = ({ profile, devices }) => {
 		<>
 			<Head>
 				<title>Dashboard - Pinterface</title>
-				<meta name="viewport" content="initial-scale:1.0, width=device-width" />
+				<meta name="viewport" content="width=device-width" />
 			</Head>
 			<Navbar profile={profile} />
-			<Box
-				bg={useColorModeValue("azure", "inherit")}
-				minH="100vh"
-				py="12"
-				px={{ base: "4", lg: "8" }}
-			>
-				{profile ? (
-					<Dashboard devices={devices} />
-				) : (
-					<>
-						<CircularProgress isIndeterminate size="xl" />
-					</>
-				)}
-			</Box>
+			{profile ? (
+				<Dashboard devices={devices} />
+			) : (
+				<>
+					<CircularProgress isIndeterminate size="xl" />
+				</>
+			)}
 		</>
 	)
 }

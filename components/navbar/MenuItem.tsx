@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
-import Link from "next/link"
-import { Text } from "@chakra-ui/react"
+import { Button, Link } from "@chakra-ui/react"
+import NextLink from "next/link"
 
 type MenuItemProps = {
 	to: string
@@ -15,10 +15,18 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 	...rest
 }) => {
 	return (
-		<Link href={to} passHref>
-			<Text display="block" {...rest} onClick={setLoggedOut} cursor="pointer">
+		<NextLink href={to} passHref>
+			<Button
+				as={Link}
+				href={to}
+				display="block"
+				variant="link"
+				color="inherit"
+				{...rest}
+				onClick={setLoggedOut}
+			>
 				{children}
-			</Text>
-		</Link>
+			</Button>
+		</NextLink>
 	)
 }

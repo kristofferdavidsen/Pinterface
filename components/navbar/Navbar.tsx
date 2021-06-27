@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Flex } from "@chakra-ui/react"
+import { Flex, useColorModeValue } from "@chakra-ui/react"
 import { Logo } from "./Logo"
 import { MenuToggle } from "./MenuToggle"
 import { MenuLinks } from "./MenuLinks"
@@ -12,7 +12,8 @@ import { MenuLinks } from "./MenuLinks"
 export const Navbar: React.FC<{ profile?: any }> = ({ profile }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const toggle = () => setIsOpen(!isOpen)
-
+	const bg = useColorModeValue("white", "gray.800")
+	const stext = useColorModeValue("orange.700", "orange.300")
 	return (
 		<Flex
 			as="nav"
@@ -21,8 +22,9 @@ export const Navbar: React.FC<{ profile?: any }> = ({ profile }) => {
 			wrap="wrap"
 			w="100%"
 			p={8}
-			bg={"#11133C"}
-			color={"#EDF5FA"}
+			bg={bg}
+			color={stext}
+			boxShadow="md"
 		>
 			<Logo />
 			<MenuToggle isOpen={isOpen} toggle={toggle} />

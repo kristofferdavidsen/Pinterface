@@ -1,6 +1,12 @@
-import { Stack, Box } from "@chakra-ui/react"
-import { useRouter } from "next/router"
-import React from "react"
+import {
+	Stack,
+	Box,
+	Switch,
+	Tooltip,
+	useColorMode,
+	Text,
+} from "@chakra-ui/react"
+import React, { useEffect, useState } from "react"
 import { MenuItem } from "./MenuItem"
 import Cookies from "js-cookie"
 
@@ -10,48 +16,11 @@ type MenuLinksProps = {
 }
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, profile }) => {
-	const router = useRouter()
 	const setLoggedOut = () => {
 		Cookies.remove("token")
-		router.push("/?loggedout=0", "/")
 	}
-
-	const LoggedInIcon: React.FC = () => {
-		return !profile ? (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="h-6 w-6"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-				aria-label="Log in"
-			>
-				<path
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					strokeWidth={2}
-					d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-				/>
-			</svg>
-		) : (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="h-6 w-6"
-				fill="none"
-				viewBox="0 0 24 24"
-				stroke="currentColor"
-				aria-label="Log out"
-			>
-				<path
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					strokeWidth={2}
-					d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-				/>
-			</svg>
-		)
-	}
-
+	const [hover, setHover] = useState<boolean>(false)
+	const { toggleColorMode, colorMode } = useColorMode()
 	return (
 		<Box
 			display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -66,8 +35,18 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, profile }) => {
 			>
 				<MenuItem to="/dashboard">Dashboard</MenuItem>
 				<MenuItem to="/login" setLoggedOut={setLoggedOut}>
-					<LoggedInIcon />
+					{!profile ? "Log in" : "Log out"}
 				</MenuItem>
+				<Tooltip label="Toggle theme" isOpen={hover} mt="8">
+					<Switch
+						isChecked={colorMode === "dark" ? true : false}
+						id="theme"
+						size="lg"
+						onMouseEnter={() => setHover(true)}
+						onMouseLeave={() => setHover(false)}
+						onChange={toggleColorMode}
+					/>
+				</Tooltip>
 			</Stack>
 		</Box>
 	)

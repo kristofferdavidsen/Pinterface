@@ -2,8 +2,7 @@ import { useEffect } from "react"
 import { Navbar } from "../components/navbar/Navbar"
 import Head from "next/head"
 import { useToast } from "@chakra-ui/toast"
-import { Box } from "@chakra-ui/layout"
-import { useColorModeValue } from "@chakra-ui/color-mode"
+import { Hero } from "../components/hero/Hero"
 
 const Home: React.FC = () => {
 	const toast = useToast()
@@ -49,20 +48,10 @@ const Home: React.FC = () => {
 		<>
 			<Head>
 				<title>Index - Pinterface</title>
-				<meta
-					name="viewport"
-					content="initial-scale:1.0, width=device-width"
-				></meta>
+				<meta name="viewport" content="width=device-width"></meta>
 			</Head>
 			<Navbar />
-			<Box
-				bg={useColorModeValue("#EDF5FA", "inherit")}
-				minH="100vh"
-				py="12"
-				px={{ base: "4", lg: "8" }}
-			>
-				<p>Home</p>
-			</Box>
+			<Hero />
 		</>
 	)
 }
