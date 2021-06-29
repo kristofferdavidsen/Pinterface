@@ -1,6 +1,13 @@
 import React from "react"
-import { Box, useColorModeValue, Heading, Text } from "@chakra-ui/react"
-import Link from "next/link"
+import {
+	Box,
+	Link,
+	useColorModeValue,
+	Button,
+	Heading,
+	Text,
+} from "@chakra-ui/react"
+import NextLink from "next/link"
 import { LoginCard } from "./LoginCard"
 import { LoginForm } from "./LoginForm"
 
@@ -18,7 +25,11 @@ const Login: React.FC<LoginProps> = ({ failedLogin }) => {
 				</Heading>
 				<Text mt="4" mb="8" align="center" maxW="md" fontWeight="medium">
 					<Text as="span">Don&apos;t have an account? </Text>
-					<Link href="/register">Register here.</Link>
+					<NextLink href="/register" passHref>
+						<Button as={Link} variant="link" color="inherit">
+							Register here.
+						</Button>
+					</NextLink>
 				</Text>
 				<LoginCard>
 					<LoginForm failedLogin={failedLogin} />

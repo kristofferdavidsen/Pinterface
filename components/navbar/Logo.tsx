@@ -1,19 +1,23 @@
-import { Link, Button } from "@chakra-ui/react"
+import { Link, Button, Image, useColorMode } from "@chakra-ui/react"
 import NextLink from "next/link"
 
 export const Logo: React.FC = (props: any) => {
+	const { colorMode } = useColorMode()
 	return (
 		<NextLink href="/" passHref>
 			<Button
 				as={Link}
 				display="block"
 				color="inherit"
-				fontSize="xl"
 				variant="unstyled"
-				fontWeight="bold"
 				aria-label="Home page"
+				size="lg"
 			>
-				Pinterface
+				<Image
+					src={colorMode === "light" ? "/Frame1.png" : "/Frame2.png"}
+					alt="Pinterface"
+					boxSize="inherit"
+				/>
 			</Button>
 		</NextLink>
 	)
