@@ -5,7 +5,7 @@ import { Card } from "../Card"
 export const Registration: React.FC = () => {
 	return (
 		<Box
-			bg={useColorModeValue("#EDF5FA", "inherit")}
+			bg={useColorModeValue("inherit", "inherit")}
 			minH="100vh"
 			py="12"
 			px={{ base: "4", lg: "8" }}

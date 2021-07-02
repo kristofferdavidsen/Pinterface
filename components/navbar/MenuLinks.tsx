@@ -17,7 +17,7 @@ type MenuLinksProps = {
 
 export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, profile }) => {
 	const setLoggedOut = () => {
-		Cookies.remove("token")
+		profile && Cookies.remove("token")
 	}
 	const [hover, setHover] = useState<boolean>(false)
 	const { toggleColorMode, colorMode } = useColorMode()
@@ -35,7 +35,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, profile }) => {
 			>
 				<MenuItem to="/dashboard">Dashboard</MenuItem>
 				<MenuItem to="/login" setLoggedOut={setLoggedOut}>
-					{!profile ? "Log in" : "Log out"}
+					{!Cookies.get("token") ? "Log in" : "Log out"}
 				</MenuItem>
 				<Tooltip label="Toggle theme" isOpen={hover} mt="8">
 					<Switch
