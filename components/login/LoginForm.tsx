@@ -61,7 +61,7 @@ export const LoginForm: React.FC<LoginProps> = ({ failedLogin }) => {
 		})
 		const body = await res.json()
 		if (body.success && body.token) {
-			Cookies.set("token", body.token)
+			Cookies.set("token", body.token, { secure: true, sameSite: "lax" })
 			setTimeout(() => {
 				router.push("/dashboard")
 			}, 500)
