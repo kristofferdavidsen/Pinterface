@@ -6,7 +6,7 @@ const useDeviceData = (suburl: string, deviceId: string) => {
 		fetch(String(url), {
 			method: "GET",
 			mode: "no-cors",
-		})
+		}).then((res) => res.json())
 	const { data, error } = useSWR(
 		`/api/device/${suburl}?token=${Cookies.get("token") ?? ""}&d=${
 			deviceId ?? ""
