@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react"
 import { Device } from "../../interfaces/Device"
 import { Temperature } from "../../interfaces/Temperature"
+import formatDate from "../../util/dateFormatting"
 import useDeviceData from "../../util/useDevicedata"
 
 export const TempTab: React.FC<{ device: Device }> = ({ device }) => {
@@ -28,15 +29,15 @@ export const TempTab: React.FC<{ device: Device }> = ({ device }) => {
 		</Box>
 	) : (
 		<Box>
-			{data ? (
+			{data.length > 0 ? (
 				data.map((temp: Temperature, index: number) => (
 					<StatGroup key={index}>
 						<Stat>
-							<StatLabel>{temp.date}</StatLabel>
+							<StatLabel>{formatDate(new Date(temp.date))}</StatLabel>
 							<StatNumber>{temp.tempCelsius}℃</StatNumber>
 						</Stat>
 						<Stat>
-							<StatLabel>{temp.date}</StatLabel>
+							<StatLabel>{formatDate(new Date(temp.date))}</StatLabel>
 							<StatNumber>{temp.tempFahrenheit}°F</StatNumber>
 						</Stat>
 						<Divider p="2" />

@@ -10,6 +10,7 @@ import {
 	Box,
 	Divider,
 } from "@chakra-ui/react"
+import { useEffect } from "react"
 import { Device } from "../../interfaces/Device"
 import { Humidity } from "../../interfaces/Humidity"
 import useDeviceData from "../../util/useDevicedata"
@@ -19,7 +20,6 @@ export const HumidityTab: React.FC<{ device: Device }> = ({ device }) => {
 		"humidity",
 		device.deviceId
 	)
-
 	return isLoading ? (
 		<Box>
 			<Skeleton height="10px" />
@@ -28,7 +28,7 @@ export const HumidityTab: React.FC<{ device: Device }> = ({ device }) => {
 		</Box>
 	) : (
 		<Box>
-			{data ? (
+			{data.length > 0 ? (
 				data.map((hum: Humidity, index: number) => (
 					<StatGroup key={index}>
 						<Stat>

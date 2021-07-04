@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { connectToDatabase } from "../../../util/mongodb"
 import { verifyToken } from "../../../util/jwttoken"
+import { connectToDatabase } from "../../../util/mongodb"
 
 export default async function handler(
 	req: NextApiRequest,
@@ -13,7 +13,7 @@ export default async function handler(
 		try {
 			const { db } = await connectToDatabase()
 			const data = await db
-				.collection("temperatur")
+				.collection("humidity")
 				.find({ deviceId: device })
 				.toArray()
 			res.status(200).json(data)

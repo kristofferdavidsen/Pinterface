@@ -2,10 +2,14 @@ import { IncomingMessage } from "http"
 import jwt, { JwtPayload } from "jsonwebtoken"
 
 const { JWT } = process.env
+const { JWT_DEVICE } = process.env
 
-export const verifyToken = (token: string): string | JwtPayload => {
+export const verifyToken = (
+	token: string,
+	device?: boolean
+): string | JwtPayload => {
 	try {
-		return jwt.verify(token, JWT)
+		return device ? jwt.verify(token, JWT_DEVICE) : jwt.verify(token, JWT)
 	} catch (e) {
 		return null
 	}

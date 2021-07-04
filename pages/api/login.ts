@@ -25,9 +25,9 @@ export default async function handler(
 				token: "Bearer " + token,
 			})
 		} else {
-			res.status(400).end()
+			res.status(404).end()
 		}
 	} else {
-		res.status(400).end()
+		res.status(404).end()
 	}
 }

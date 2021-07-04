@@ -1,17 +1,4 @@
-import {
-	Accordion,
-	AccordionButton,
-	AccordionIcon,
-	AccordionItem,
-	AccordionPanel,
-	Box,
-	Tab,
-	TabList,
-	TabPanel,
-	TabPanels,
-	Tabs,
-	useColorModeValue,
-} from "@chakra-ui/react"
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import { Device } from "../../interfaces/Device"
 import { HumidityTab } from "./HumidityTab"
 import { PressureTab } from "./PressureTab"

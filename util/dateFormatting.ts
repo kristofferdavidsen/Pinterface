@@ -1,4 +1,4 @@
 const formatDate = (date: Date) => {
-	return `Dato: ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}, kl. ${date.getHours()}.${date.getMinutes()}`
+	return `Date: ${date.getDate()}.${date.getMonth()}.${date.getFullYear()}, Time: ${date.getHours()}.${date.getMinutes()}`
 }
 export default formatDate
