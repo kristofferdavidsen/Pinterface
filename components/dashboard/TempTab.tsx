@@ -10,7 +10,6 @@ import {
 	Box,
 	Divider,
 } from "@chakra-ui/react"
-import { useEffect } from "react"
 import { Device } from "../../interfaces/Device"
 import { Temperature } from "../../interfaces/Temperature"
 import useDeviceData from "../../util/useDevicedata"
@@ -29,19 +28,23 @@ export const TempTab: React.FC<{ device: Device }> = ({ device }) => {
 		</Box>
 	) : (
 		<Box>
-			{data.map((temp: Temperature, index: number) => (
-				<StatGroup key={index}>
-					<Stat>
-						<StatLabel>{temp.date}</StatLabel>
-						<StatNumber>{temp.tempCelsius}℃</StatNumber>
-					</Stat>
-					<Stat>
-						<StatLabel>{temp.date}</StatLabel>
-						<StatNumber>{temp.tempFahrenheit}°F</StatNumber>
-					</Stat>
-					<Divider p="2" />
-				</StatGroup>
-			))}
+			{data ? (
+				data.map((temp: Temperature, index: number) => (
+					<StatGroup key={index}>
+						<Stat>
+							<StatLabel>{temp.date}</StatLabel>
+							<StatNumber>{temp.tempCelsius}℃</StatNumber>
+						</Stat>
+						<Stat>
+							<StatLabel>{temp.date}</StatLabel>
+							<StatNumber>{temp.tempFahrenheit}°F</StatNumber>
+						</Stat>
+						<Divider p="2" />
+					</StatGroup>
+				))
+			) : (
+				<Text>No data available...</Text>
+			)}
 		</Box>
 	)
 }

@@ -35,7 +35,7 @@ export const MenuLinks: React.FC<MenuLinksProps> = ({ isOpen, profile }) => {
 			>
 				<MenuItem to="/dashboard">Dashboard</MenuItem>
 				<MenuItem to="/login" setLoggedOut={setLoggedOut}>
-					{!Cookies.get("token") ? "Log in" : "Log out"}
+					{Cookies.get("token") ? "Log out" : "Log in"}
 				</MenuItem>
 				<Tooltip label="Toggle theme" isOpen={hover} mt="8">
 					<Switch
