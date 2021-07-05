@@ -29,6 +29,7 @@ const DashboardPage: React.FC<DashboardProps> = ({ profile, devices }) => {
 				<meta name="viewport" content="width=device-width" />
 			</Head>
 			<Navbar profile={profile} />
+			{/*TODO: Sjekk på utgått cookie*/}
 			{profile ? (
 				<Dashboard devices={devices} />
 			) : (

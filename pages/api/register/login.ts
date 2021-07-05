@@ -6,6 +6,7 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
+	//TODO: CSRF-token på form.
 	const { db } = await connectToDatabase()
 	const body = JSON.parse(req.body)
 	try {
