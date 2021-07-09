@@ -1,15 +1,8 @@
-import {
-	Box,
-	Heading,
-	useColorModeValue,
-	Grid,
-	GridItem,
-	Select,
-	Flex,
-} from "@chakra-ui/react"
-import { useEffect, useState } from "react"
+import { Box, Heading, useColorModeValue, Select, Flex } from "@chakra-ui/react"
+import { useState } from "react"
 import { Device } from "../../interfaces/Device"
 import { DeviceTab } from "./DeviceTab"
+import { Stats } from "./Stats"
 type DashboardProps = {
 	devices: Array<Device>
 }
@@ -46,29 +39,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ devices }) => {
 					))}
 				</Select>
 			</Flex>
-			<Grid
-				h="200px"
-				templateRows="repeat(2, 1fr)"
-				templateColumns="repeat(5, 1fr)"
-				gap={8}
-				pt={8}
-			>
-				<GridItem rowSpan={2} colSpan={2}>
-					<Box maxW="lg" mx="auto" color={text}>
-						<Heading textAlign="left" size="xl" fontWeight="bold" pb="4">
-							Data
-						</Heading>
-						<DeviceTab device={device} />
-					</Box>
-				</GridItem>
-				<GridItem rowSpan={2} colSpan={2}>
-					<Box maxW="lg" mx="auto" color={text}>
-						<Heading textAlign="left" size="xl" fontWeight="bold" pb="4">
-							Stats
-						</Heading>
-					</Box>
-				</GridItem>
-			</Grid>
+			<Flex align="left" wrap="wrap">
+				<Box maxW="lg" mx="auto" color={text}>
+					<Heading textAlign="left" size="xl" fontWeight="bold" pb="4">
+						Data
+					</Heading>
+					<DeviceTab device={device} />
+				</Box>
+
+				<Box maxW="lg" mx="auto" color={text}>
+					<Heading textAlign="left" size="xl" fontWeight="bold" pb="4">
+						Stats
+					</Heading>
+					<Stats />
+				</Box>
+			</Flex>
 		</Box>
 	)
 }
